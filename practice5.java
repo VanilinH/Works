@@ -2,7 +2,7 @@ import java.util.Scanner; // Додавання класу для роботи �
 
 public class Main {
     public static void main(String[] args) {
-        //  Завдання 1
+        //  Завдання 1.
         double a = 38.9;
         double b = -4.7;
         double c = 5;
@@ -19,7 +19,7 @@ public class Main {
         System.out.printf("x = %.4f%n", x);
         System.out.printf("y = %.4f%n", y);
 
-        //  Завдання 2
+        //  Завдання 2.
         Scanner sc = new Scanner(System.in);
         System.out.println("\n=== Завдання 2 ===");
         System.out.print("Введіть a: "); // зчитування змінної a
