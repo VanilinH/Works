@@ -1,104 +1,55 @@
-import java.util.Scanner;
-import java.util.Random;
-
-
-//              ЗАВДАННЯ 1
+import java.util.*;
 
 public class Main {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.print("Введіть перше число: ");
-        double a = sc.nextDouble();
+        //  Завдання 1
+        double x, a, b, f;
+        System.out.print("Введіть x: ");
+        x = sc.nextDouble();
+        System.out.print("Введіть a: ");
+        a = sc.nextDouble();
+        System.out.print("Введіть b: ");
+        b = sc.nextDouble();
 
-        System.out.print("Введіть оператор (+, -, *, /): ");
-        char op = sc.next().charAt(0);
-
-        System.out.print("Введіть друге число: ");
-        double b = sc.nextDouble();
-
-        double result;
-
-        switch (op) {
-            case '+':
-                result = a + b;
-                System.out.println("Результат: " + result);
-                break;
-            case '-':
-                result = a - b;
-                System.out.println("Результат: " + result);
-                break;
-            case '*':
-                result = a * b;
-                System.out.println("Результат: " + result);
-                break;
-            case '/':
-                if (b != 0) {
-                    result = a / b;
-                    System.out.println("Результат: " + result);
-                } else {
-                    System.out.println("Помилка: ділення на нуль");
-                }
-                break;
-            default:
-                System.out.println("Невідомий оператор");
+        if (x >= 1 && x < 3) f = 9 / (a * x);
+        else if (x == 3) f = a * x * x + x + b;
+        else {
+            System.out.println("x поза межами області визначення");
+            f = Double.NaN;
         }
+        System.out.println("f(x) = " + f);
 
-        sc.close();
+
+        //  Завдання 2
+        Random rand = new Random();
+        int number = rand.nextInt(10) + 1;
+        int guess, attempts = 0;
+        do {
+            System.out.print("Введіть число: ");
+            guess = sc.nextInt();
+            attempts++;
+            if (guess > number) System.out.println("Занадто багато");
+            else if (guess < number) System.out.println("Занадто мало");
+            else System.out.println("Вірно!");
+        } while (guess != number);
+        System.out.println("Кількість спроб: " + attempts);
+
+
+        //  Завдання 3
+        System.out.print("Введіть N: ");
+        int N = sc.nextInt();
+        System.out.println("Прості числа від 1 до " + N + ":");
+        for (int i = 2; i <= N; i++) {
+            boolean prime = true;
+            for (int j = 2; j <= Math.sqrt(i); j++) {
+                if (i % j == 0) {
+                    prime = false;
+                    break;
+                }
+            }
+            if (prime) System.out.println(i + " ");
+        }
     }
 }
-
-
-//                          ЗАВДАННЯ 2
-
-//public class Main {
-//    public static void main(String[] args) {
-//        Scanner sc = new Scanner(System.in);
-//        Random rand = new Random();
-//
-//        int secret = rand.nextInt(10) + 1;
-//        int guess;
-//        int attempts = 0;
-//
-//        System.out.println("Вгадай число від 1 до 10");
-//
-//        do {
-//            System.out.print("Введіть число: ");
-//            guess = sc.nextInt();
-//            attempts++;
-//
-//            if (guess < secret) {
-//                System.out.println("Більше");
-//            } else if (guess > secret) {
-//                System.out.println("Менше");
-//            } else {
-//                System.out.println("Ви вгадали число " + secret + " за " + attempts + " спроб");
-//            }
-//        } while (guess != secret);
-//
-//        sc.close();
-//    }
-//}
-
-//                   ЗАВДАННЯ 3
-
-//public class Main {
-//    public static void main(String[] args) {
-//        System.out.println("Таблиця Келі для множення від 1 до 10:");
-//
-//        System.out.print("\t");
-//        for (int i = 1; i <= 10; i++) {
-//            System.out.print(i + "\t");
-//        }
-//        System.out.println();
-//
-//        for (int i = 1; i <= 10; i++) {
-//            System.out.print(i + "\t");
-//            for (int j = 1; j <= 10; j++) {
-//                System.out.print((i * j) + "\t");
-//            }
-//            System.out.println();
-//        }
-//    }
-//}
-
