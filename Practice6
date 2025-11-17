@@ -1,0 +1,143 @@
+import java.util.*;
+
+public class Task {
+    public static void main(String[] args) {
+        task1();
+        task2();
+        task3();
+        task4();
+        task5();
+    }
+
+    // Task 1: Count even/odd
+    static void task1() {
+        System.out.println("Task 1:");
+        Random rnd = new Random();
+        int[] arr = new int[20];
+        int even = 0, odd = 0;
+
+        for (int i = 0; i < arr.length; i++) {
+            arr[i] = rnd.nextInt(100);
+            if (arr[i] % 2 == 0) even++;
+            else odd++;
+        }
+
+        System.out.println("Even: " + even);
+        System.out.println("Odd: " + odd);
+        System.out.println();
+    }
+
+    // Task 2: Polygon check
+    static void task2() {
+        System.out.println("Task 2:");
+        Scanner sc = new Scanner(System.in);
+
+        System.out.print("Enter number of angles: ");
+        int n = sc.nextInt();
+
+        int[] angles = new int[n];
+        int sum = 0;
+
+        System.out.println("Enter angles:");
+        for (int i = 0; i < n; i++) {
+            angles[i] = sc.nextInt();
+            sum += angles[i];
+        }
+
+        int need = 180 * (n - 2);
+
+        if (sum == need) System.out.println("Polygon can exist.");
+        else System.out.println("Polygon cannot exist.");
+
+        System.out.println();
+    }
+
+    // Task 3: Replace value
+    static void task3() {
+        System.out.println("Task 3:");
+        Scanner sc = new Scanner(System.in);
+        Random rnd = new Random();
+
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+        int[] arr = new int[n];
+
+        for (int i = 0; i < n; i++) arr[i] = rnd.nextInt(50);
+
+        System.out.print("Value to replace: ");
+        int oldVal = sc.nextInt();
+        System.out.print("New value: ");
+        int newVal = sc.nextInt();
+
+        boolean found = false;
+        for (int i = 0; i < n; i++) {
+            if (arr[i] == oldVal) {
+                arr[i] = newVal;
+                found = true;
+            }
+        }
+
+        if (found) System.out.println("Replacement done.");
+        else System.out.println("Value not found.");
+
+        System.out.println();
+    }
+
+    // Task 4: Sine table
+    static void task4() {
+        System.out.println("Task 4:");
+        int count = 0;
+
+        for (int i = 0; i <= 90; i++) {
+            double sin = Math.sin(Math.toRadians(i));
+            System.out.printf("%.4f ", sin);
+            count++;
+
+            if (count == 10) {
+                System.out.println();
+                count = 0;
+            }
+        }
+
+        System.out.println("\n");
+    }
+
+    // Task 5: Check ordering
+    static void task5() {
+        System.out.println("Task 5:");
+        Scanner sc = new Scanner(System.in);
+        Random rnd = new Random();
+
+        System.out.print("Enter array size: ");
+        int n = sc.nextInt();
+
+        int[] arr = new int[n];
+        for (int i = 0; i < n; i++) arr[i] = rnd.nextInt(100);
+
+        System.out.print("1 - ascending, 2 - descending: ");
+        int mode = sc.nextInt();
+
+        boolean ordered = true;
+
+        if (mode == 1) {
+            for (int i = 1; i < n; i++) {
+                if (arr[i] < arr[i - 1]) {
+                    ordered = false;
+                    break;
+                }
+            }
+        } else {
+            for (int i = 1; i < n; i++) {
+                if (arr[i] > arr[i - 1]) {
+                    ordered = false;
+                    break;
+                }
+            }
+        }
+
+        if (ordered) System.out.println("Array is ordered.");
+        else System.out.println("Array is not ordered.");
+
+        System.out.println();
+    }
+}
