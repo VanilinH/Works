@@ -1,5 +1,8 @@
 import java.util.Random;
 import java.util.Scanner;
+import static java.lang.Math.*;
+
+
 
 public class home {
 
@@ -16,69 +19,40 @@ public class home {
                 {7, 8, 9, 10}
         };
 
-// making pyramid
-        for (int i = 0; i < py.length; i++) {
-            for (int s = 0; s < py.length - 1 - i; s++) {
-            }
-            for (int j = 0; j < py[i].length; j++) {
-                System.out.print(py[i][j] + " ");
+// Pyramid
+        System.out.println("Pyramid:");
+        for (int[] row : py) {
+            for (int val : row) {
+                System.out.print(val + " ");
             }
             System.out.println();
         }
-// reversing pyramid:P
+
+// reverse of it
         System.out.println("Reverse:");
         for (int i = py.length - 1; i >= 0; i--) {
-            for (int s = 0; s < py.length - 1 - i; s++) {
-            }
-            for (int j = 0; j < py[i].length; j++) {
-                System.out.print(py[i][j] + " ");
+            for (int val : py[i]) {
+                System.out.print(val + " ");
             }
             System.out.println();
         }
 
- // Намагався використати такий вигляд коду но тоді reverse піраміди виходив не правильний: чому?
-//        for (int[] row : p) {
-//            for (int value : row) {
-//                System.out.print(value + " ");
-//            }
-//            System.out.println();
-//        }
-//
-//        System.out.println("Reverse:");
-//        for (int i = p.length - 1; i >= 0; i--) {
-//            // print leading spaces
-//            for (int s = 0; s < p.length - 1 - i; s++) {
-//                System.out.print(" ");
-//            }
-//
-//            for (int value : p[i]) {
-//                System.out.print(value + " ");
-//            }
-//            System.out.println();
-//        }
-
-// task 2
+        // task 2
         System.out.println("\nTask 2");
 
         double[][] arr = new double[4][4];
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = 0; j < arr[i].length; j++) {
                 arr[i][j] = rng.nextDouble() * 50;
                 if (i % 2 != 0 || j % 2 != 0) {
-                    arr[i][j] = Math.sqrt(arr[i][j]);
+                    arr[i][j] = sqrt(arr[i][j]);
                 }
             }
         }
+        printMatrix(arr);
 
-        for (int i = 0; i < 4; i++) {
-            for (int j = 0; j < 4; j++) {
-                System.out.printf("%.2f ", arr[i][j]);
-            }
-            System.out.println();
-        }
-
-// task 3
+        // task 3
         System.out.println("\nTask 3");
         System.out.println("Enter 5x5 matrix:");
 
@@ -92,7 +66,7 @@ public class home {
 
         System.out.println("Determinant: " + det(mat));
 
-// task 4
+        // task 4
         System.out.println("\nTask 4");
         System.out.print("Size: ");
         int n = sc.nextInt();
@@ -101,11 +75,10 @@ public class home {
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                m[i][j] = rng.nextInt(30);
-                System.out.print(m[i][j] + " ");
+                m[i][j] = abs(rng.nextInt(30));
             }
-            System.out.println();
         }
+        printMatrix(m);
 
         System.out.print("Row: ");
         int rr = sc.nextInt();
@@ -115,14 +88,9 @@ public class home {
         double[][] mm = makeMinor(m, rr, cc);
 
         System.out.println("Minor:");
-        for (int i = 0; i < mm.length; i++) {
-            for (int j = 0; j < mm[i].length; j++) {
-                System.out.print(mm[i][j] + " ");
-            }
-            System.out.println();
-        }
+        printMatrix(mm);
 
-// task 5
+        // task 5
         System.out.println("\nTask 5");
 
         System.out.print("Matrix size: ");
@@ -134,11 +102,12 @@ public class home {
         for (int i = 0; i < sni; i++) {
             for (int j = 0; j < sni; j++) {
                 A[i][j] = rng.nextInt(50);
-                System.out.print(A[i][j] + " ");
             }
-            System.out.println();
         }
+        System.out.println("Original:");
+        printMatrix(A);
 
+        // transpose
         for (int i = 0; i < sni; i++) {
             for (int j = 0; j < sni; j++) {
                 B[j][i] = A[i][j];
@@ -146,41 +115,49 @@ public class home {
         }
 
         System.out.println("Transposed:");
-        for (int i = 0; i < sni; i++) {
-            for (int j = 0; j < sni; j++) {
-                System.out.print(B[i][j] + " ");
+        printMatrix(B);
+    }
+
+    // методы
+    static void printMatrix(double[][] mat) {
+        for (double[] row : mat) {
+            for (double val : row) {
+                System.out.printf("%.2f ", val);
             }
             System.out.println();
         }
     }
 
-// determinant
+    static void printMatrix(int[][] mat) {
+        for (int[] row : mat) {
+            for (int val : row) {
+                System.out.print(val + " ");
+            }
+            System.out.println();
+        }
+    }
+
+    // Детерминант и минор
     static double det(double[][] a) {
         int n = a.length;
         if (n == 1) return a[0][0];
 
         double sum = 0;
-
         for (int i = 0; i < n; i++) {
             sum += (i % 2 == 0 ? 1 : -1) * a[0][i] * det(makeMinor(a, 0, i));
         }
-
         return sum;
     }
 
-// minor
     static double[][] makeMinor(double[][] a, int r, int c) {
         int n = a.length;
         double[][] res = new double[n - 1][n - 1];
-
         int row = 0;
         for (int i = 0; i < n; i++) {
             if (i == r) continue;
             int col = 0;
-
             for (int j = 0; j < n; j++) {
                 if (j == c) continue;
-
                 res[row][col] = a[i][j];
                 col++;
             }
