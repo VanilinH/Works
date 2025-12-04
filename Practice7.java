@@ -1,168 +1,126 @@
-import java.util.Random;
-import java.util.Scanner;
-import static java.lang.Math.*;
+import java.security.SecureRandom;
+import java.util.Arrays;
 
-
-
-public class home {
-
+public class Task1 {
     public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        Random rng = new Random();
 
-// task 1
-        System.out.println("Task 1");
-        int[][] py = {
-                {1},
-                {2, 3},
-                {4, 5, 6},
-                {7, 8, 9, 10}
-        };
+        SecureRandom sr = new SecureRandom();
 
-// Pyramid
-        System.out.println("Pyramid:");
-        for (int[] row : py) {
-            for (int val : row) {
-                System.out.print(val + " ");
-            }
-            System.out.println();
+        int x = 5;
+
+        int [][] array = new int [x][]; 
+
+        for (int i = 0; i < x; i++) {
+            array[i] = new int[i + 1]; 
         }
 
-// reverse of it
-        System.out.println("Reverse:");
-        for (int i = py.length - 1; i >= 0; i--) {
-            for (int val : py[i]) {
-                System.out.print(val + " ");
+        for (int i = 0; i < array.length; i++) {
+            for (int j = 0; j < array[i].length; j++) {
+                array[i][j] = sr.nextInt(100);
             }
-            System.out.println();
+
+            System.out.println(Arrays.toString(array[i])); 
         }
 
-        // task 2
-        System.out.println("\nTask 2");
+        for  (int i = array.length - 1; i >=0; i--) {
+            System.out.println(Arrays.toString(array[i]));
+        }
 
-        double[][] arr = new double[4][4];
 
-        for (int i = 0; i < arr.length; i++) {
-            for (int j = 0; j < arr[i].length; j++) {
-                arr[i][j] = rng.nextDouble() * 50;
-                if (i % 2 != 0 || j % 2 != 0) {
-                    arr[i][j] = sqrt(arr[i][j]);
+    }
+}
+
+import java.security.SecureRandom;
+import java.util.Arrays;
+import java.lang.Math;
+public class Task2 {
+    public static void main(String[] args) {
+
+        SecureRandom sr = new SecureRandom();
+
+        int row = 3;
+        int colw = 3;
+        double [][] array = new double [row][colw];
+
+        System.out.println("Массив:");
+        for (int i = 0; i < row; i++) {
+            for (int j = 0; j < colw; j++) {
+                array[i][j] = sr.nextDouble(100);
+
+            }
+            System.out.println(Arrays.toString(array[i]));
+        }
+
+        System.out.println("Исправленный массив:");
+        for  (int i = 0; i < row; i++) {
+            for (int j = 0; j < colw; j++) {
+
+                if (i % 2 == 1 || j % 2 == 1) {
+                    array[i][j] = Math.sqrt(array[i][j]);
                 }
+
             }
-        }
-        printMatrix(arr);
-
-        // task 3
-        System.out.println("\nTask 3");
-        System.out.println("Enter 5x5 matrix:");
-
-        double[][] mat = new double[5][5];
-
-        for (int i = 0; i < 5; i++) {
-            for (int j = 0; j < 5; j++) {
-                mat[i][j] = sc.nextDouble();
-            }
+            System.out.println(Arrays.toString(array[i]));
         }
 
-        System.out.println("Determinant: " + det(mat));
 
-        // task 4
-        System.out.println("\nTask 4");
-        System.out.print("Size: ");
+    }
+}
+
+
+import java.util.Scanner;
+import java.security.SecureRandom;
+
+public class Task5 {
+    public static void main(String[] args) {
+
+        Scanner sc = new Scanner(System.in);
+        SecureRandom sr = new SecureRandom();
+
+        System.out.println("Введите размер квадратной матрицы:");
         int n = sc.nextInt();
 
-        double[][] m = new double[n][n];
+        int[][] array = new int[n][n];
+
 
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
-                m[i][j] = abs(rng.nextInt(30));
-            }
-        }
-        printMatrix(m);
-
-        System.out.print("Row: ");
-        int rr = sc.nextInt();
-        System.out.print("Col: ");
-        int cc = sc.nextInt();
-
-        double[][] mm = makeMinor(m, rr, cc);
-
-        System.out.println("Minor:");
-        printMatrix(mm);
-
-        // task 5
-        System.out.println("\nTask 5");
-
-        System.out.print("Matrix size: ");
-        int sni = sc.nextInt();
-
-        int[][] A = new int[sni][sni];
-        int[][] B = new int[sni][sni];
-
-        for (int i = 0; i < sni; i++) {
-            for (int j = 0; j < sni; j++) {
-                A[i][j] = rng.nextInt(50);
-            }
-        }
-        System.out.println("Original:");
-        printMatrix(A);
-
-        // transpose
-        for (int i = 0; i < sni; i++) {
-            for (int j = 0; j < sni; j++) {
-                B[j][i] = A[i][j];
+                array[i][j] = sr.nextInt(10);
             }
         }
 
-        System.out.println("Transposed:");
-        printMatrix(B);
+        System.out.println("Матрица:");
+        print(array);
+
+
+        int[][] transposed = transpose(array);
+
+        System.out.println("Транспонированная матрица:");
+        print(transposed);
+
+        sc.close();
     }
 
-    // методы
-    static void printMatrix(double[][] mat) {
-        for (double[] row : mat) {
-            for (double val : row) {
-                System.out.printf("%.2f ", val);
+
+    static void print(int[][] m) {
+        for (int[] row : m) {
+            for (int x : row) {
+                System.out.print(x + " ");
             }
             System.out.println();
         }
     }
 
-    static void printMatrix(int[][] mat) {
-        for (int[] row : mat) {
-            for (int val : row) {
-                System.out.print(val + " ");
-            }
-            System.out.println();
-        }
-    }
 
-    // Детерминант и минор
-    static double det(double[][] a) {
-        int n = a.length;
-        if (n == 1) return a[0][0];
+    static int[][] transpose(int[][] m) {
+        int n = m.length;
+        int[][] t = new int[n][n];
 
-        double sum = 0;
         for (int i = 0; i < n; i++) {
-            sum += (i % 2 == 0 ? 1 : -1) * a[0][i] * det(makeMinor(a, 0, i));
-        }
-        return sum;
-    }
-
-    static double[][] makeMinor(double[][] a, int r, int c) {
-        int n = a.length;
-        double[][] res = new double[n - 1][n - 1];
-        int row = 0;
-        for (int i = 0; i < n; i++) {
-            if (i == r) continue;
-            int col = 0;
             for (int j = 0; j < n; j++) {
-                if (j == c) continue;
-                res[row][col] = a[i][j];
-                col++;
+                t[j][i] = m[i][j];
             }
-            row++;
         }
-        return res;
+        return t;
     }
 }
