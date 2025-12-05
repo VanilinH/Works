@@ -1,27 +1,26 @@
 import java.security.SecureRandom;
 import java.util.Arrays;
 
-public class Task1 {
+public class home {
     public static void main(String[] args) {
 
         SecureRandom sr = new SecureRandom();
 
         int x = 5;
 
-        int [][] array = new int [x][]; 
+        int [][] array = new int [x][];
 
         for (int i = 0; i < x; i++) {
-            array[i] = new int[i + 1]; 
+            array[i] = new int[i + 1];
         }
 
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[i].length; j++) {
                 array[i][j] = sr.nextInt(100);
             }
-
-            System.out.println(Arrays.toString(array[i])); 
+            System.out.println(Arrays.toString(array[i]));
         }
-
+        System.out.println('\n');
         for  (int i = array.length - 1; i >=0; i--) {
             System.out.println(Arrays.toString(array[i]));
         }
