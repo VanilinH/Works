@@ -22,8 +22,8 @@ public class Task {
     }
 
     private static String reverse(String s) {
-        if (s.length() == 1) return s; // Base case
-        return s.charAt(s.length() - 1) + reverse(s.substring(0, s.length() - 1)); // Recursive step
+        if (s.length() == 1) return s;
+        return s.charAt(s.length() - 1) + reverse(s.substring(0, s.length() - 1));
     }
 
     private static String findLongestWord(String sentence) {
