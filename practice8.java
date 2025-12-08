@@ -15,18 +15,18 @@ public class Task {
         scanner.close();
     }
 
-    private static boolean isPalindrome(String str) {
+    public static boolean isPalindrome(String str) {
         str = str.replaceAll("\\s+", "").toLowerCase();
         StringBuilder sb = new StringBuilder(str);
         return sb.reverse().toString().equals(str);
     }
 
-    private static String reverse(String s) {
+    public static String reverse(String s) {
         if (s.length() == 1) return s;
         return s.charAt(s.length() - 1) + reverse(s.substring(0, s.length() - 1));
     }
 
-    private static String findLongestWord(String sentence) {
+    public static String findLongestWord(String sentence) {
         String[] words = sentence.split("\\s+");
         String longest = "";
         for (String word : words) {
@@ -37,7 +37,7 @@ public class Task {
         return longest + " (" + longest.length() + " characters)";
     }
 
-    private static String findShortestWord(String sentence) {
+    public static String findShortestWord(String sentence) {
         String[] words = sentence.split("\\s+");
         String shortest = words[0];
         for (String word : words) {
@@ -48,7 +48,7 @@ public class Task {
         return shortest + " (" + shortest.length() + " characters)";
     }
 
-    private static String toCamelCase(String str) {
+    public static String toCamelCase(String str) {
         String[] parts = str.split("[-_\\s]+");
         StringBuilder camelCase = new StringBuilder();
         for (String part : parts) {
@@ -60,7 +60,7 @@ public class Task {
         return camelCase.toString();
     }
 
-    private static String censorWords(String input) {
+    public static String censorWords(String input) {
         String[] profanityList = {"Female", "Gay"}; 
         for (String word : profanityList) {
             StringBuilder replacement = new StringBuilder();
