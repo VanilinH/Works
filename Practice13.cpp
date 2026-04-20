@@ -31,7 +31,7 @@ int main() {
 
 int main() {
     int n;
-    printf("n: \n");
+    printf("Number of angles: \n");
     scanf("%d", &n);
 
     double mas[50];
